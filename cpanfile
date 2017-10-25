@@ -8,6 +8,8 @@ requires 'Getopt::Long';
 requires 'Carp';
 requires 'Plack';
 requires 'Twiggy';
+requires 'Text::Xslate';
+
 
 on test => sub {
     requires 'Test::More';
