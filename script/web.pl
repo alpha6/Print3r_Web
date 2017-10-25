@@ -4,14 +4,25 @@ use v5.20;
 use strict;
 use warnings;
 
+use lib 'lib';
+
 use Plack;
 use Plack::Request;
 use Plack::Request::Upload;
 use Plack::Builder;
 
+use Text::Xslate qw(mark_raw);
+
+use Print3r::Web::Utils;
+
 
 use File::Copy;
 
+use Data::Dumper;
+
+
+my $tx = Text::Xslate->new();
+my $utils = Print3r::Web::Utils->new();
 
 my $GCODE_LOCATION = '/home/alpha6/GCODE/';
 
@@ -22,12 +33,14 @@ my $app = sub {
     my $res    = $req->new_response(200);
     my $params = $req->parameters();
 
-    my $body = qq~<html><body><form method=POST action=/upload enctype="multipart/form-data">
-    <input type="file" name="gcode" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-    </form>
-    </body>
-    </html>~;
+    my $files_list = $utils->get_files_list($GCODE_LOCATION);
+
+    # say Dumper($files_list);
+    my %vars = (
+        files => $files_list
+    );
+
+    my $body = $tx->render('templates/index.tx', \%vars);
     
 
     $res->body($body);

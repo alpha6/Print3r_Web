@@ -1,0 +1,19 @@
+<html>
+    <head>
+    <title>Prin3r Web</title>
+    </head>
+    <body>
+    <h1>Upload g-code</h1>
+    <form method=POST action=/upload enctype="multipart/form-data">
+    <input type="file" name="gcode" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+    </form>
+    
+    <div class="files_list">
+    : for $files -> $file {
+        <li><: $file.title :></li>
+    : } 
+
+    </div>
+    </body>
+    </html>
