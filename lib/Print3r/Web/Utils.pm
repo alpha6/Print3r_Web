@@ -3,6 +3,7 @@ package Print3r::Web::Utils;
 use v5.20;
 use strict;
 use warnings;
+use File::Spec;
 
 sub new {
     bless {}, shift;
@@ -18,7 +19,8 @@ sub get_files_list {
     opendir my $DIR, $folder_path or die $!;
     for my $file (readdir($DIR)) {
         next if ($file !~ m/\.gcode$/);
-        push @files_list, {title => $file};
+        my @stat = stat(File::Spec->catfile($folder_path, $file));
+        push @files_list, {title => $file, size => $stat[7], mtime => $stat[9]};
     }
     closedir $DIR;
 
