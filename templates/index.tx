@@ -11,7 +11,7 @@
     
     <div class="files_list">
     : for $files -> $file {
-        <li>name: <: $file.title :> size: <: $file.size :> mtime <: $file.mtime :></li>
+        <li>name: <: $file.title :> size: <: $file.size :> mtime: <: $file.mtime :></li>
     : } 
 
     </div>

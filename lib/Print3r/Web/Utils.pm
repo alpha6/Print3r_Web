@@ -4,6 +4,7 @@ use v5.20;
 use strict;
 use warnings;
 use File::Spec;
+use Time::Moment;
 
 sub new {
     bless {}, shift;
@@ -20,7 +21,10 @@ sub get_files_list {
     for my $file (readdir($DIR)) {
         next if ($file !~ m/\.gcode$/);
         my @stat = stat(File::Spec->catfile($folder_path, $file));
-        push @files_list, {title => $file, size => $stat[7], mtime => $stat[9]};
+    
+        my $date = Time::Moment->from_epoch($stat[9])->strftime('%F %T');
+
+        push @files_list, {title => $file, size => $stat[7], mtime => $date};
     }
     closedir $DIR;
 

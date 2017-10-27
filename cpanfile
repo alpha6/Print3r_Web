@@ -9,6 +9,7 @@ requires 'Carp';
 requires 'Plack';
 requires 'Twiggy';
 requires 'Text::Xslate';
+requires 'Time::Moment';
 
 
 on test => sub {
