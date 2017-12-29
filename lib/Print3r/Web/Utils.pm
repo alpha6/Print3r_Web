@@ -28,6 +28,8 @@ sub get_files_list {
     }
     closedir $DIR;
 
+    @files_list = sort {$b->{'mtime'} cmp $a->{'mtime'}} @files_list;
+
     return \@files_list;
 }
 

@@ -10,9 +10,12 @@
     </form>
     
     <div class="files_list">
+    <table class="files_list">
+    <tr><td>name</td><td>size</td><td>mtime</td></tr>
     : for $files -> $file {
-        <li>name: <: $file.title :> size: <: $file.size :> mtime: <: $file.mtime :></li>
+        <tr><td><: $file.title :></td><td><: $file.size :></td><td><: $file.mtime :></td></tr>
     : } 
+    </table>
 
     </div>
     </body>
