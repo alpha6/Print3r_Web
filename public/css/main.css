@@ -1,0 +1,22 @@
+table.files_list {
+    border: none;
+    border-collapse: collapse;
+}
+
+table.files_list th { 
+    border-bottom: solid 2px black;
+}
+
+table.files_list td, table.files_list th{ 
+    margin: 0;
+    padding: 5px 10px;
+    border-right: solid 1px black;
+}
+
+table.files_list td:last-child, table.files_list th:last-child { 
+    border-right: none;
+}
+
+table.files_list tr:nth-child(odd){
+    background: rgb(218, 214, 214);
+ }

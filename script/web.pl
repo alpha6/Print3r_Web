@@ -17,6 +17,8 @@ use Print3r::Web::Utils;
 
 
 use File::Copy;
+use File::Spec;
+use Cwd;
 
 use Data::Dumper;
 
@@ -25,6 +27,8 @@ my $tx = Text::Xslate->new();
 my $utils = Print3r::Web::Utils->new();
 
 my $GCODE_LOCATION = '/home/alpha6/GCODE/';
+
+my $CWD = getcwd;
 
 my $app = sub {
     my $env    = shift;
@@ -71,6 +75,7 @@ my $upload_app = sub {
 
 
 my $main_app = builder {
+    enable "Static", path => qr!^/css|img!, root => File::Spec->catdir($CWD, '/public');
     mount '/upload' => builder { $upload_app };
     mount "/" => builder { $app; };
 };
